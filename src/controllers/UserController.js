@@ -33,9 +33,22 @@ const UserController = {
       response.status(500).send(`Error fetching data from database.\n${error}`);
     }
   },
-  // getUsers: async (req,res) => {
+  getPlaces: async (req, res) => {
+    const { userName } = req.query;
 
-  // }
+    try {
+      let snapshot = await db.collection("users")
+                              .where("name", "==", userName)
+                              .get();
+    
+      snapshot.forEach((item) => {
+        res.json(item.data())
+      })
+    } catch (error) {
+      res.json(error)
+    }
+  }
+
 }
 
 module.exports = UserController;

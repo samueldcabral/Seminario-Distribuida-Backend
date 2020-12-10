@@ -10,6 +10,7 @@ const UserController = require("./controllers/UserController");
 app.use(cors());
 app.use(express.json());
 app.get('/github-info', GithubController.get);
+app.get('/places', UserController.getPlaces)
 app.post('/places', UserController.storePlaces)
 
 app.listen(PORT, () => {
